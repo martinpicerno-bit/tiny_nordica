@@ -1,0 +1,261 @@
+---
+import { SITE } from '../data/site';
+import { HERO } from '../content/landing';
+---
+
+<section class="hero" aria-label="Hero Tiny Granero">
+
+  <!-- Capa 1: foto -->
+  <div class="hero__foto" aria-hidden="true">
+    <img
+      src="/images/hero.jpg"
+      alt=""
+      width="1440"
+      height="900"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
+
+  <!-- Capa 2: color cálido encima de la foto -->
+  <div class="hero__tinte" aria-hidden="true"></div>
+
+  <!-- Capa 3: gradiente vertical para legibilidad del texto -->
+  <div class="hero__gradiente" aria-hidden="true"></div>
+
+  <!-- Contenido -->
+  <div class="hero__body">
+    <div class="hero__container">
+      <p class="hero__eyebrow">Matanzas · Pupuya · Puertecillo</p>
+      <h1 class="hero__titulo">{HERO.titulo}</h1>
+      <p class="hero__bajada">{HERO.subtitulo}</p>
+      <p class="hero__desc">{HERO.descripcion}</p>
+      <div class="hero__acciones">
+        <a
+          href={SITE.WHATSAPP_URL}
+          class="hero__btn hero__btn--wa"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-meta-event="Contact"
+          data-meta-content="whatsapp_hero"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.561 4.14 1.541 5.872L.057 23.86a.5.5 0 0 0 .614.641l6.178-1.457A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 0 1-4.983-1.361l-.357-.212-3.67.866.92-3.565-.233-.368A9.807 9.807 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          Escribirnos por WhatsApp
+        </a>
+        <a
+          href={SITE.AIRBNB_URL}
+          class="hero__btn hero__btn--airbnb"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-meta-event="Lead"
+          data-meta-content="airbnb_hero"
+        >
+          Ver disponibilidad en Airbnb
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Línea de cierre cálida -->
+  <div class="hero__linea" aria-hidden="true"></div>
+
+</section>
+
+<style>
+/* ── Estructura ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: #1C1710; /* fallback si la foto tarda */
+}
+
+/* ── Foto ───────────────────────────────────────────────── */
+.hero__foto {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+/* ── Tinte cálido: capa de color sobre la foto ──────────── */
+/* Marrón tierra semitransparente que "calienta" la imagen  */
+.hero__tinte {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(60, 35, 10, 0.45);
+}
+
+/* ── Gradiente vertical para texto legible ──────────────── */
+/* Negro casi sólido en la parte inferior donde vive el texto */
+.hero__gradiente {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent          0%,
+    transparent          30%,
+    rgba(20, 13, 5, 0.6) 55%,
+    rgba(20, 13, 5, 0.88) 75%,
+    rgba(20, 13, 5, 0.97) 100%
+  );
+}
+
+/* ── Contenido ──────────────────────────────────────────── */
+.hero__body {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding-bottom: 5rem;
+}
+
+.hero__container {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  max-width: 640px;
+  margin-left: max(2rem, calc(50vw - 540px));
+}
+
+/* eyebrow */
+.hero__eyebrow {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #D4AA7D;
+  margin-bottom: 1.25rem;
+}
+
+/* h1 */
+.hero__titulo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.8rem, 7vw, 4.5rem);
+  font-weight: 400;
+  color: #FDF8F2;
+  line-height: 1.03;
+  letter-spacing: -0.015em;
+  margin-bottom: 1rem;
+}
+
+/* tagline */
+.hero__bajada {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  color: #C9A97A;
+  font-weight: 400;
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+}
+
+/* descripción */
+.hero__desc {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.975rem;
+  color: rgba(253, 248, 242, 0.78);
+  line-height: 1.72;
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+}
+
+/* CTAs */
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.625rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  text-decoration: none;
+}
+
+.hero__btn:hover { transform: translateY(-2px); }
+.hero__btn:active { transform: translateY(0); }
+
+.hero__btn--wa {
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 2px 16px rgba(37, 211, 102, 0.3);
+}
+.hero__btn--wa:hover {
+  background: #20c05c;
+  box-shadow: 0 4px 24px rgba(37, 211, 102, 0.42);
+}
+
+.hero__btn--airbnb {
+  background: rgba(253, 248, 242, 0.1);
+  color: #FDF8F2;
+  border: 1.5px solid rgba(253, 248, 242, 0.4);
+  backdrop-filter: blur(4px);
+}
+.hero__btn--airbnb:hover {
+  background: rgba(253, 248, 242, 0.16);
+  border-color: rgba(253, 248, 242, 0.7);
+}
+
+/* ── Línea de cierre ────────────────────────────────────── */
+.hero__linea {
+  position: relative;
+  z-index: 3;
+  height: 4px;
+  background: linear-gradient(to right, #8C6A4A, #C9A97A, #8C6A4A);
+  opacity: 0.7;
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero__body {
+    padding-bottom: 3.5rem;
+  }
+
+  .hero__container {
+    padding-inline: 1.5rem;
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .hero__acciones {
+    flex-direction: column;
+  }
+
+  .hero__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__btn { transition: none; }
+}
+</style>

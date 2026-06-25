@@ -1,0 +1,50 @@
+---
+import { INSTAGRAM } from '../content/landing';
+import { SITE } from '../data/site';
+---
+
+<section class="instagram" aria-labelledby="instagram-titulo">
+  <div class="container">
+    <p class="eyebrow">{INSTAGRAM.eyebrow}</p>
+    <h2 class="section-h2 section-h2--dark instagram__titulo" id="instagram-titulo">{INSTAGRAM.titulo}</h2>
+    <p class="instagram__desc">{INSTAGRAM.descripcion}</p>
+    <a
+      href={SITE.INSTAGRAM_URL}
+      class="btn btn--outline"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Ver Tiny Granero en Instagram"
+      data-meta-event="custom:ViewInstagram"
+      data-meta-content="instagram_seccion"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      {INSTAGRAM.cta}
+    </a>
+  </div>
+</section>
+
+<style>
+.instagram {
+  background: var(--color-roto);
+  padding-block: var(--sp-16);
+  text-align: center;
+  border-block: 1px solid var(--color-suave);
+}
+
+.instagram__titulo {
+  margin-block: var(--sp-3) var(--sp-3);
+}
+
+.instagram__desc {
+  font-size: var(--text-base);
+  color: rgba(26,26,24,0.58);
+  line-height: 1.65;
+  margin-bottom: var(--sp-8);
+  max-width: 360px;
+  margin-inline: auto;
+}
+</style>

@@ -1,0 +1,46 @@
+---
+// ─── Meta Pixel + tracking de clics ──────────────────────────────────────────
+// Eventos usados:
+//   - WhatsApp  → Contact              (estándar Meta)
+//   - Airbnb    → Lead                 (estándar Meta)
+//   - Instagram → custom:ViewInstagram (personalizado)
+//
+// Para trackear un nuevo CTA, agregar al elemento HTML:
+//   data-meta-event="Contact"            → evento estándar
+//   data-meta-event="custom:MiEvento"    → evento personalizado
+//   data-meta-content="whatsapp_hero"    → identifica dónde está el botón
+import { SITE } from '../data/site';
+const hasPixel = SITE.META_PIXEL_ID && !SITE.META_PIXEL_ID.startsWith('[');
+---
+
+{hasPixel && (
+  <script type="text/javascript" data-pixel-id={SITE.META_PIXEL_ID} is:inline>
+    window.addEventListener('load', function () {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+
+      var pixelId = document.querySelector('[data-pixel-id]').dataset.pixelId;
+      fbq('init', pixelId);
+      fbq('track', 'PageView');
+
+      // Delegación global: detecta clics en cualquier elemento con data-meta-event
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-meta-event]');
+        if (!el) return;
+        var eventName = el.dataset.metaEvent;
+        var params = {};
+        if (el.dataset.metaContent) params.content_name = el.dataset.metaContent;
+        if (eventName.indexOf('custom:') === 0) {
+          fbq('trackCustom', eventName.slice(7), params);
+        } else {
+          fbq('track', eventName, params);
+        }
+      });
+    });
+  </script>
+)}

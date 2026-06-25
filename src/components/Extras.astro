@@ -1,0 +1,88 @@
+---
+import { EXTRAS } from '../content/landing';
+import { SITE } from '../data/site';
+---
+
+<section class="extras" id="extras" aria-labelledby="extras-titulo">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow eyebrow--light">{EXTRAS.eyebrow}</p>
+      <h2 class="section-h2 section-h2--light" id="extras-titulo">{EXTRAS.titulo}</h2>
+      <p class="section-desc section-desc--light">{EXTRAS.descripcion}</p>
+    </div>
+
+    <div class="extras__grid">
+      {EXTRAS.items.map((item) => (
+        <div class="extras__card">
+          <h3 class="extras__nombre">{item.nombre}</h3>
+          <p class="extras__texto">{item.descripcion}</p>
+          <a
+            href={SITE.WHATSAPP_URL}
+            class="extras__link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Consultar sobre ${item.nombre} por WhatsApp`}
+            data-meta-event="Contact"
+            data-meta-content="whatsapp_extras"
+          >
+            Consultar →
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.extras {
+  background: var(--color-musgo);
+  padding-block: var(--sp-20);
+}
+
+.extras__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--sp-4);
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.extras__card {
+  border: 1px solid rgba(201,185,154,0.25);
+  border-radius: var(--radius);
+  padding: var(--sp-8) var(--sp-6);
+  background: rgba(247,244,238,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.extras__nombre {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--color-arena);
+  line-height: 1.2;
+}
+
+.extras__texto {
+  font-size: var(--text-sm);
+  color: rgba(247,244,238,0.7);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.extras__link {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-arena);
+  letter-spacing: 0.04em;
+  transition: color var(--duration) var(--ease);
+}
+
+.extras__link:hover { color: var(--color-roto); }
+
+@media (max-width: 640px) {
+  .extras { padding-block: var(--sp-16); }
+}
+</style>

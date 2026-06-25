@@ -1,0 +1,76 @@
+---
+import { ESPACIO } from '../content/landing';
+---
+
+<section class="espacio" id="espacio" aria-labelledby="espacio-titulo">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">{ESPACIO.eyebrow}</p>
+      <h2 class="section-h2 section-h2--dark" id="espacio-titulo">{ESPACIO.titulo}</h2>
+      <p class="section-desc section-desc--dark">{ESPACIO.descripcion}</p>
+    </div>
+  </div>
+
+  <div class="espacio__galeria" role="list" aria-label="Fotos del espacio">
+    {ESPACIO.imagenes.map((img, i) => (
+      <div class="espacio__foto" role="listitem">
+        <img
+          src={img.src}
+          alt={img.alt}
+          width="800"
+          height="600"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+.espacio {
+  padding-block: var(--sp-20) 0;
+  background: var(--color-roto);
+}
+
+.espacio__galeria {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  padding: 0 6px 6px;
+  margin-top: var(--sp-12);
+}
+
+.espacio__foto {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: var(--color-suave);
+}
+
+.espacio__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.espacio__foto:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 640px) {
+  .espacio { padding-block: var(--sp-16) 0; }
+  .espacio__galeria {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 0 0 4px;
+    margin-top: var(--sp-8);
+  }
+  .espacio__foto { aspect-ratio: 16/10; }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .espacio__galeria { grid-template-columns: repeat(2, 1fr); }
+  .espacio__foto:last-child { grid-column: 1 / -1; aspect-ratio: 16/7; }
+}
+</style>

@@ -1,0 +1,135 @@
+---
+import { FAQ } from '../content/landing';
+---
+
+<section class="faq" id="faq" aria-labelledby="faq-titulo">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow eyebrow--light">Preguntas frecuentes</p>
+      <h2 class="section-h2 section-h2--light" id="faq-titulo">Todo lo que necesitás saber.</h2>
+    </div>
+
+    <dl class="faq__lista">
+      {FAQ.map((item, i) => (
+        <div class="faq__item">
+          <dt>
+            <button
+              class="faq__pregunta"
+              type="button"
+              aria-expanded="false"
+              aria-controls={`faq-respuesta-${i}`}
+              id={`faq-btn-${i}`}
+            >
+              <span>{item.pregunta}</span>
+              <span class="faq__icono" aria-hidden="true">+</span>
+            </button>
+          </dt>
+          <dd
+            class="faq__respuesta"
+            id={`faq-respuesta-${i}`}
+            role="region"
+            aria-labelledby={`faq-btn-${i}`}
+            hidden
+          >
+            <p>{item.respuesta}</p>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.faq__pregunta');
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const target = document.getElementById(btn.getAttribute('aria-controls')!);
+      const icono = btn.querySelector('.faq__icono');
+      btns.forEach((b) => {
+        b.setAttribute('aria-expanded', 'false');
+        const t = document.getElementById(b.getAttribute('aria-controls')!);
+        if (t) t.hidden = true;
+        const ic = b.querySelector('.faq__icono');
+        if (ic) ic.textContent = '+';
+      });
+      if (!expanded && target) {
+        btn.setAttribute('aria-expanded', 'true');
+        target.hidden = false;
+        if (icono) icono.textContent = '−';
+      }
+    });
+  });
+</script>
+
+<style>
+.faq {
+  background: var(--color-carbon);
+  padding-block: var(--sp-20);
+}
+
+.faq__lista {
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.faq__item {
+  border-bottom: 1px solid rgba(201,185,154,0.15);
+}
+
+.faq__item:first-of-type {
+  border-top: 1px solid rgba(201,185,154,0.15);
+}
+
+.faq__pregunta {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-roto);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.5;
+  transition: color var(--duration) var(--ease);
+  min-height: 56px;
+}
+
+.faq__pregunta:hover,
+.faq__pregunta[aria-expanded="true"] {
+  color: var(--color-arena);
+}
+
+.faq__icono {
+  font-size: var(--text-xl);
+  font-weight: 300;
+  color: var(--color-arena);
+  flex-shrink: 0;
+  line-height: 1;
+  font-family: sans-serif;
+  width: 24px;
+  text-align: center;
+}
+
+.faq__respuesta {
+  padding-bottom: var(--sp-4);
+  padding-right: var(--sp-8);
+}
+
+.faq__respuesta p {
+  font-size: var(--text-sm);
+  color: rgba(247,244,238,0.62);
+  line-height: 1.75;
+}
+
+@media (max-width: 640px) {
+  .faq { padding-block: var(--sp-16); }
+  .faq__respuesta { padding-right: var(--sp-4); }
+}
+</style>

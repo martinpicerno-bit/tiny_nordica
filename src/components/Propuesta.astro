@@ -1,0 +1,72 @@
+---
+import { PROPUESTA } from '../content/landing';
+---
+
+<section class="propuesta" id="propuesta" aria-labelledby="propuesta-titulo">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow eyebrow--light">{PROPUESTA.eyebrow}</p>
+      <h2 class="section-h2 section-h2--light" id="propuesta-titulo">{PROPUESTA.titulo}</h2>
+    </div>
+
+    <ul class="prop-grid" role="list">
+      {PROPUESTA.beneficios.map((b) => (
+        <li class="prop-item">
+          <span class="prop-icono" aria-hidden="true">{b.icono}</span>
+          <div>
+            <h3 class="prop-nombre">{b.titulo}</h3>
+            <p class="prop-texto">{b.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+.propuesta {
+  background: var(--color-carbon);
+  padding-block: var(--sp-20);
+}
+
+.prop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sp-8) var(--sp-6);
+  list-style: none;
+}
+
+.prop-item {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+}
+
+.prop-icono {
+  font-size: 1.1rem;
+  color: var(--color-arena);
+  flex-shrink: 0;
+  margin-top: 0.25em;
+  line-height: 1;
+}
+
+.prop-nombre {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-roto);
+  margin-bottom: var(--sp-2);
+  line-height: 1.2;
+}
+
+.prop-texto {
+  font-size: var(--text-sm);
+  color: rgba(247,244,238,0.6);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .propuesta { padding-block: var(--sp-16); }
+  .prop-grid { gap: var(--sp-6); }
+}
+</style>

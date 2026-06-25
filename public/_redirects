@@ -1,0 +1,6 @@
+# Redirects para Cloudflare Pages
+# Añadir aquí redirecciones si se necesitan en el futuro
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Ejemplo: www → apex
+# https://www.tinygranero.cl/* https://tinygranero.cl/:splat 301
